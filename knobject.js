@@ -1,11 +1,14 @@
-function createKnob() {
-    return new Knob();
-}
 function Knob() {
     this.type = 'smooth';
     this.knobValue = 0;
     this.min = 0;
     this.max = 100;
+    this.leftFunction = function() {
+        console.log('Please update me.')
+    }
+    this.rightFunction = function() {
+        console.log('Please update me.')
+    }
 
     return this;
 }
@@ -73,8 +76,13 @@ Knob.prototype.capture = function(event) {
         var ctx = this.context;
         ctx.clearRect(0,0,this.diameter,this.diameter);
         ctx.setTransform(1, 0, 0, 1, 0, 0);
-        
+
         this.preRotate();
+
+        if(this.min == 0)
+        {
+            this.leftFunction(this.knobValue);
+        }
     }
 }
 Knob.prototype.drawKnob = function() {
@@ -97,7 +105,7 @@ Knob.prototype.left = function() {
         this.rotate('left');
         this.drawKnob();
 
-        //define custom events here
+        this.leftFunction(this.knobValue);
     }
 }
 Knob.prototype.right = function() {
@@ -107,7 +115,7 @@ Knob.prototype.right = function() {
         this.rotate('right');
         this.drawKnob();
 
-        //define custom events here
+        this.rightFunction(this.knobValue);
     }
 }
 Knob.prototype.preRotate = function() {

@@ -8,3 +8,15 @@ body {
 #canvas {
 	border: 1px solid #000;
 }
+#myKnob {
+	border: 1px solid #000;
+}
+#value {
+	border: 1px solid #000;
+	width: 30px;
+	text-align: right;
+	font-weight: 600;
+	font-family: courier;
+	color: red;
+	background: black;
+}

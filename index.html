@@ -27,28 +27,30 @@
 	<canvas id="canvas" width="30" height="30"></canvas>
 	<div>This is our resulting canvas. As you can see, it is currently blank.</div>
 
-	<h4>Next, we have to create the instance of our knob in Javascript:</h4>
-	<span class="code">
-		&lt;script&gt;
-		<br/>
-		var knob = createKnob();
-		<br/>
-		&lt;/script&gt;
-		<br/>
-	</span>
-	<h4>
-	Now, we have to give our knob some input to connect it to our canvas.
+	<h4>Next, we have to create the instance of our knob in Javascript.
 	<br/>
-	The bare minimum we need is the diameter and the canvas id.
+	We also have to give our knob some input to connect it to our canvas.
+	<br/>
+	And finally, we need a pair of custom functions for our knob to perform.
 	</h4>
 	<span class="code">
 		&lt;script&gt;
 		<br/>
-		var knob = createKnob();
+		var knob = new Knob();
+		<br/>
+		var left = function(value) {
+			document.getElementById('value').innerHTML = value;
+		}
+		<br/>
+		var right = function(value) {
+			document.getElementById('value').innerHTML = value;
+		}
 		<br/>
 		var array = {
 			diameter: 30,
-			location: 'myKnob'
+			location: 'myKnob',
+			leftFunction: left,
+			rightFunction: right
 		}
 		<br/>
 		knob.init(array);
@@ -58,13 +60,24 @@
 	</span>
 	<br/>
 	<canvas id="myKnob" width="30" height="30" onmousedown="knob.capture(event)"></canvas>
+	<div id="value">0</div>
+	<div>Voila, our knob is created and is ready to be twisted.</div>
+	<br/>
 
 <script>
-var knob = createKnob();
+var knob = new Knob;
 
+var left = function(value) {
+	document.getElementById('value').innerHTML = value;
+}
+var right = function(value) {
+	document.getElementById('value').innerHTML = value;
+}
 var options = {
 	diameter: 30,
 	location: 'myKnob',
+	leftFunction: left,
+	rightFunction: right
 }
 
 knob.init(options);
