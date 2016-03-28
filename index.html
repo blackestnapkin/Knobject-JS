@@ -14,7 +14,7 @@
 	<span class="code">
 		&lt;body&gt;
 		<br/>
-		&lt;canvas id="myKnob" width="30" height="30"&gt;&lt;/canvas&gt;
+		&lt;canvas id="myKnob" width="30" height="30" onmousedown="knob.capture(event)"&gt;&lt;/canvas&gt;
 		</br>
 		&lt;/body&gt;
 		</br>
@@ -22,7 +22,18 @@
 	<h4>
 	Rememeber, that we need to define the width and height of the canvas to properly work with it.
 	</br> 
-	Later, we will pass the defined width into the Knob object's diameter property.
+	Later, we will pass the width into the Knob object's diameter property.
+	<br/>
+	Also note, the inline onmousedown function. Let's break it down:
+	<br/>
+	<br/>
+	"knob" is going to refer to our variable that we have save our knob object to.
+	<br/>
+	".capture()" is the function the knob will run internally.
+	<br/>
+	"event" is needed to determine which direction the knob rotates. Moving the
+	<br/>
+	mouse up, turns it right and down, turns it left.
 	</h4>
 	<canvas id="canvas" width="30" height="30"></canvas>
 	<div>This is our resulting canvas. As you can see, it is currently blank.</div>
