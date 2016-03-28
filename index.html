@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title></title>
+<meta charset="UTF-8">
+<script type="text/javascript" src="knobject.js"></script>
+<link rel="stylesheet" type="text/CSS" href="style.css"/>
+</head>
+
+<body>
+	<h1>Welcome to the Knobject.js tutorial.<h1>
+
+	<h4>First, we have to create our knob canvas:</h4>
+	<span class="code">
+		&lt;body&gt;
+		<br/>
+		&lt;canvas id="myKnob" width="30" height="30"&gt;&lt;/canvas&gt;
+		</br>
+		&lt;/body&gt;
+		</br>
+	</span>
+	<h4>
+	Rememeber, that we need to define the width and height of the canvas to properly work with it.
+	</br> 
+	Later, we will pass the defined width into the Knob object's diameter property.
+	</h4>
+	<canvas id="canvas" width="30" height="30"></canvas>
+	<div>This is our resulting canvas. As you can see, it is currently blank.</div>
+
+	<h4>Next, we have to create the instance of our knob in Javascript:</h4>
+	<span class="code">
+		&lt;script&gt;
+		<br/>
+		var knob = createKnob();
+		<br/>
+		&lt;/script&gt;
+		<br/>
+	</span>
+	<h4>
+	Now, we have to give our knob some input to connect it to our canvas.
+	<br/>
+	The bare minimum we need is the diameter and the canvas id.
+	</h4>
+	<span class="code">
+		&lt;script&gt;
+		<br/>
+		var knob = createKnob();
+		<br/>
+		var array = {
+			diameter: 30,
+			location: 'myKnob'
+		}
+		<br/>
+		knob.init(array);
+		<br/>
+		&lt;/script&gt;
+		<br/>
+	</span>
+	<br/>
+	<canvas id="myKnob" width="30" height="30" onmousedown="knob.capture(event)"></canvas>
+
+<script>
+var knob = createKnob();
+
+var options = {
+	diameter: 30,
+	location: 'myKnob',
+}
+
+knob.init(options);
+</script>
+</body>
+</html>

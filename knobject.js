@@ -70,14 +70,11 @@ Knob.prototype.capture = function(event) {
     }else {
         this.knobValue = 0;
 
-        if(this.min == -100)
-        {
-            var ctx = this.context;
-            ctx.clearRect(0,0,this.diameter,this.diameter);
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
-            
-            this.drawKnob();
-        }
+        var ctx = this.context;
+        ctx.clearRect(0,0,this.diameter,this.diameter);
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        
+        this.preRotate();
     }
 }
 Knob.prototype.drawKnob = function() {

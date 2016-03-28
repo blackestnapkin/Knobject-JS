@@ -1,0 +1,10 @@
+body {
+	background: gray;
+}
+.code {
+	font-family: courier;
+	background: rgb(180,180,180);
+}
+#canvas {
+	border: 1px solid #000;
+}
