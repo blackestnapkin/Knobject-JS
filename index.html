@@ -3,81 +3,96 @@
 <head>
 <title></title>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <script type="text/javascript" src="knobject.js"></script>
 <link rel="stylesheet" type="text/CSS" href="style.css"/>
 </head>
 
 <body>
-	<h1>Welcome to the Knobject.js tutorial.<h1>
-
-	<h4>First, we have to create our knob canvas:</h4>
-	<span class="code">
-		&lt;body&gt;
-		<br/>
-		&lt;canvas id="myKnob" width="30" height="30" onmousedown="knob.capture(event)"&gt;&lt;/canvas&gt;
-		</br>
-		&lt;/body&gt;
-		</br>
-	</span>
-	<h4>
-	Rememeber, that we need to define the width and height of the canvas to properly work with it.
-	</br> 
-	Later, we will pass the width into the Knob object's diameter property.
-	<br/>
-	Also note, the inline onmousedown function. Let's break it down:
-	<br/>
-	<br/>
-	"knob" is going to refer to our variable that we have save our knob object to.
-	<br/>
-	".capture()" is the function the knob will run internally.
-	<br/>
-	"event" is needed to determine which direction the knob rotates. Moving the
-	<br/>
-	mouse up, turns it right and down, turns it left.
-	</h4>
-	<canvas id="canvas" width="30" height="30"></canvas>
-	<div>This is our resulting canvas. As you can see, it is currently blank.</div>
-
-	<h4>Next, we have to create the instance of our knob in Javascript.
-	<br/>
-	We also have to give our knob some input to connect it to our canvas.
-	<br/>
-	And finally, we need a pair of custom functions for our knob to perform.
-	</h4>
-	<span class="code">
-		&lt;script&gt;
-		<br/>
-		var knob = new Knob();
-		<br/>
-		var left = function(value) {
-			document.getElementById('value').innerHTML = value;
-		}
-		<br/>
-		var right = function(value) {
-			document.getElementById('value').innerHTML = value;
-		}
-		<br/>
-		var array = {
-			diameter: 30,
-			location: 'myKnob',
-			leftFunction: left,
-			rightFunction: right
-		}
-		<br/>
-		knob.init(array);
-		<br/>
-		&lt;/script&gt;
-		<br/>
-	</span>
-	<br/>
-	<canvas id="myKnob" width="30" height="30" onmousedown="knob.capture(event)"></canvas>
-	<div id="value">0</div>
-	<div>Voila, our knob is created and is ready to be twisted.</div>
-	<br/>
+	<div class="container">
+		<div class="row navbar">
+			<div class="col-md-12">
+				<h1>Welcome to the Knobject.js tutorial.</h1>
+			</div>
+		</div>
+		<div class="panel panel-default">
+		 	<div class="panel-body text">
+		    	<div class="col-md-4">
+				<br/>
+				<p>First, we have to make a container for our knob:</p>
+				<br/>
+			</div>
+			<div class="col-md-5">
+				<div class="code">
+					&lt;body&gt;
+					<br/>
+					&lt;div id="knobContainer"&gt;&lt;/div&gt;
+					</br>
+					&lt;/body&gt;
+					</br>
+				</div>
+			</div>
+			<div class="col-md-4"></div>
+		  </div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body text">
+				<div class="col-md-4">
+					<p>Next, we have to initialize our knob in Javascript.</p>
+					<br/>
+					<p><strong>diameter:</strong> the diameter of the knob in pixels</p>
+					<p><strong>knobContainer:</strong> the id of the div housing the knob</p>
+					<p><strong>knobId:</strong> the id of the canvas generated for the knob</p>
+					<p><strong>knobValue:</strong> the position of the knob</p>
+					<p><strong>max:</strong> the maximum value that knobValue can have</p>
+					<p><strong>min:</strong> the minimum value that knobValue can have</p>
+					<p><strong>onLeftTurn:</strong> the function called when the knob is turned left, knobValue is passed in as an argument</p>
+					<p><strong>onRightTurn:</strong> the function called when the knob is turned right, knobValue is passed in as an argument</p>
+					<p><strong>type:</strong> defines either 'smooth' or 'stepped' taper</p>
+				</div>
+				<div class="col-md-5">
+					<div class="code">
+						<div>&lt;script&gt;</div>
+						<div>var left = function(value) { 
+						<br/>
+						&nbsp; document.getElementById('value').innerHTML = value; 
+						<br/>
+						}</div>
+						<div>var right = function(value) { 
+						<br/>
+						&nbsp; document.getElementById('value').innerHTML = value; 
+						<br/>
+						}</div>
+						<div>var array = { 
+						<br/>
+						&nbsp; containerId: 'knobContainer', 
+						<br/>
+						&nbsp; knobId: 'knob', 
+						<br/>
+						&nbsp; onLeftTurn: left, 
+						<br/>
+						&nbsp; onRightTurn: right 
+						<br/>
+						}</div>
+						<div>var knob = new Knob(options);</div>
+						<div>&lt;/script&gt;</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<p style="margin-top:50px;">Voila, our knob is created and is ready to be twisted.</p>
+					<div style="width:150px;height:100px;margin:auto;border:1px solid #000;">
+						<div id="knobContainer" style="float:left;display:inline;margin-top:25px;margin-left:25px;"></div>
+						<div id="value" style="float:right;display:inline;margin-top:40px;margin-right:15px;">0</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <script>
-var knob = new Knob;
-
 var left = function(value) {
 	document.getElementById('value').innerHTML = value;
 }
@@ -85,13 +100,20 @@ var right = function(value) {
 	document.getElementById('value').innerHTML = value;
 }
 var options = {
-	diameter: 30,
-	location: 'myKnob',
-	leftFunction: left,
-	rightFunction: right
+	containerId: 'knobContainer',
+	knobId: 'knob',
+	onLeftTurn: left,
+	onRightTurn: right
 }
 
-knob.init(options);
+var knob = new Knob(options);
 </script>
+
+<!-- Latest compiled and minified jQuery -->
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 </body>
 </html>
