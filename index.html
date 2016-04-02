@@ -127,7 +127,7 @@
 					<p style="margin-top:50px;">Voila, our knob is created and is ready to be twisted.</p>
 					<div style="width:150px;height:100px;margin:auto;border:1px solid #000;">
 						<div id="knobContainer2" class="knobContainers"></div>
-						<div id="value2" class="value">0</div>
+						<div id="value2" class="value">100</div>
 					</div>
 				</div>
 			</div>
@@ -150,13 +150,14 @@ var options1 = {
 	}
 }
 
-var knob1 = new Knob(options1);
+//var knob1 = new Knob(options1);
 
 var options2 = {
 	containerId: 'knobContainer2',
 	knobId: 'knob2',
-	min: -100,
-	max: 800,
+	min: 20,
+	max: 1000,
+	centerValue: 100,
 	orientation: 'noon',
 	onLeftTurn: function(value) {
 		document.getElementById('value2').innerHTML = value;
