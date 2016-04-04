@@ -23,17 +23,18 @@
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
 					<h4>Parameters:</h4>
-					<p><strong>diameter:</strong> the diameter of the knob in pixels</p>
+					<p><strong>defaultValue:</strong> the the default position of the knobrelative to your min and max</p>
+					<p><strong>diameter:</strong> the diameter of the knob in pixels; the default is '50px'</p>
 					<p><strong>knobContainer:</strong> the id of the div housing the knob</p>
 					<p><strong>knobId:</strong> the id of the canvas generated for the knob</p>
-					<p><strong>knobValue:</strong> the position of the knob</p>
-					<p><strong>max:</strong> the maximum value that knobValue can have</p>
-					<p><strong>min:</strong> the minimum value that knobValue can have</p>
+					<p><strong>max:</strong> the maximum value that 'value' can have</p>
+					<p><strong>min:</strong> the minimum value that 'value' can have</p>
 					<p><strong>onCenter:</strong> the function called when the knob is reset(by alt/option clicking), knobValue is passed as argument</p>
-					<p style="font-face:courier;"><strong>&nbsp; NOTE: onCenter will only be called if min is set to -100</strong></p>
+					<p style="font-face:courier;"><strong>&nbsp; NOTE: onCenter will only be called if knob orientaion is 'centered'</strong></p>
 					<p><strong>onLeftTurn:</strong> the function called when the knob is turned left, knobValue is passed as argument</p>
 					<p><strong>onRightTurn:</strong> the function called when the knob is turned right, knobValue is passed as argument</p>
-					<p><strong>type:</strong> defines either 'smooth' or 'stepped' taper</p>
+					<p><strong>orientation:</strong> defines whether the knob's default position is all the way down ('normal') or upright ('centered')</p>
+					<p><strong>value:</strong> the position of the knob</p>
 				</div>
 				<div class="col-md-2"></div>
 			</div>
@@ -146,6 +147,16 @@
 				</div>
 			</div>
 		</div>
+		<div class="panel panel-default">
+			<div class="panel-body text">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div id="realKnobContainer"></div>
+					<div id="realValue" class="value"></div>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+		</div>
 	</div>
 
 <script>
@@ -155,7 +166,7 @@ var options1 = {
 	knobId: 'knob1',
 	min: 0,
 	max: 100,
-	value: 25,
+	defaultValue: 25,
 	onLeftTurn: function(value) {
 		document.getElementById('value1').innerHTML = value;
 	},
@@ -171,7 +182,7 @@ var options2 = {
 	knobId: 'knob2',
 	min: -300,
 	max: 100,
-	value: -200,
+	defaultValue: -200,
 	onLeftTurn: function(value) {
 		document.getElementById('value2').innerHTML = value;
 	},
@@ -187,7 +198,7 @@ var options3 = {
 	knobId: 'knob3',
 	min: -800,
 	max: 0,
-	value: -600,
+	defaultValue: -600,
 	onLeftTurn: function(value) {
 		document.getElementById('value3').innerHTML = value;
 	},
@@ -203,7 +214,7 @@ var options4 = {
 	knobId: 'knob4',
 	min: -200,
 	max: -100,
-	value: -175,
+	defaultValue: -175,
 	onLeftTurn: function(value) {
 		document.getElementById('value4').innerHTML = value;
 	},
@@ -219,12 +230,15 @@ var options5 = {
 	knobId: 'knob5',
 	min: 0,
 	max: 100,
-	orientation: 'noon',
+	orientation: 'centered',
 	defaultValue: 25,
 	onLeftTurn: function(value) {
 		document.getElementById('value5').innerHTML = value;
 	},
 	onRightTurn: function(value) {
+		document.getElementById('value5').innerHTML = value;
+	},
+	onCenter: function(value) {
 		document.getElementById('value5').innerHTML = value;
 	}
 }
@@ -236,12 +250,15 @@ var options6 = {
 	knobId: 'knob6',
 	min: -300,
 	max: 100,
-	orientation: 'noon',
+	orientation: 'centered',
 	defaultValue: -200,
 	onLeftTurn: function(value) {
 		document.getElementById('value6').innerHTML = value;
 	},
 	onRightTurn: function(value) {
+		document.getElementById('value6').innerHTML = value;
+	},
+	onCenter: function(value) {
 		document.getElementById('value6').innerHTML = value;
 	}
 }
@@ -253,12 +270,15 @@ var options7 = {
 	knobId: 'knob7',
 	min: -800,
 	max: 0,
-	orientation: 'noon',
+	orientation: 'centered',
 	defaultValue: -600,
 	onLeftTurn: function(value) {
 		document.getElementById('value7').innerHTML = value;
 	},
 	onRightTurn: function(value) {
+		document.getElementById('value7').innerHTML = value;
+	},
+	onCenter: function(value) {
 		document.getElementById('value7').innerHTML = value;
 	}
 }
@@ -270,27 +290,53 @@ var options8 = {
 	knobId: 'knob8',
 	min: -200,
 	max: -100,
-	orientation: 'noon',
+	orientation: 'centered',
 	defaultValue: -175,
 	onLeftTurn: function(value) {
 		document.getElementById('value8').innerHTML = value;
 	},
 	onRightTurn: function(value) {
 		document.getElementById('value8').innerHTML = value;
+	},
+	onCenter: function(value) {
+		document.getElementById('value8').innerHTML = value;
 	}
 }
 
 var knob8 = new Knob(options8);
 
-document.getElementById('value1').innerHTML = knob1.value;
-document.getElementById('value2').innerHTML = knob2.value;
-document.getElementById('value3').innerHTML = knob3.value;
-document.getElementById('value4').innerHTML = knob4.value;
+document.getElementById('value1').innerHTML = knob1.defaultValue;
+document.getElementById('value2').innerHTML = knob2.defaultValue;
+document.getElementById('value3').innerHTML = knob3.defaultValue;
+document.getElementById('value4').innerHTML = knob4.defaultValue;
 
 document.getElementById('value5').innerHTML = knob5.defaultValue;
 document.getElementById('value6').innerHTML = knob6.defaultValue;
 document.getElementById('value7').innerHTML = knob7.defaultValue;
 document.getElementById('value8').innerHTML = knob8.defaultValue;
+
+var options9 = {
+	containerId: 'realKnobContainer',
+	knobId: 'realKnob',
+	max: null,
+	min: -100,
+	defaultValue: null,
+	step: null,
+	onLeftTurn: function(value) {
+		document.getElementById('realValue').innerHTML = value;
+	},
+	onRightTurn: function(value) {
+		document.getElementById('realValue').innerHTML = value;
+	},
+	onCenter: function(value) {
+		document.getElementById('realValue').innerHTML = value;
+	}
+}
+
+var knob9 = new Knob(options9);
+
+document.getElementById('realValue').innerHTML = knob9.defaultValue;
+
 </script>
 
 <!-- Latest compiled and minified jQuery -->
