@@ -1,7 +1,6 @@
 function Knob(array) {
     var self = this;
 
-    this.centerValue = 0;
     this.diameter = 50;
     this.knobValue = 0;
     this.min = 0;
@@ -41,13 +40,28 @@ function Knob(array) {
 
         this.containerId = 'knobContainer';
     }
-    if(this.knobId == null || typeof this.knobId != 'string') { this.knobId = 'knob'}
+    if(this.knobId == null || typeof this.knobId != 'string') { this.knobId = 'knob'; }
+
+    function createClass(name, rules){
+        var style = document.createElement('style');
+        style.type = 'text/CSS';
+        document.getElementsByTagName('head')[0].appendChild(style);
+        if(!(style.sheet || {}).insertRule) 
+        {
+            (style.styleSheet || style.sheet).addRule(name, rules);
+        }else
+        {
+            style.sheet.insertRule(name + "{" + rules + "}", 0);
+        }
+    }
+    createClass('.noSelect',"text-decoration:none;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default;");
 
     var canvas = document.createElement("canvas");
     
     canvas.setAttribute("width", this.diameter);
     canvas.setAttribute("height", this.diameter);
     canvas.setAttribute('id', this.knobId);
+    canvas.className = 'noSelect';
     
     document.getElementById(this.containerId).appendChild(canvas);
 
@@ -58,8 +72,32 @@ function Knob(array) {
     
     if(this.knobValue == null || typeof this.knobValue != 'number') { this.knobValue = 0; } 
     if(this.max == null || typeof this.max != 'number') { this.max = 100; } 
-    if(this.min == null || typeof this.max != 'number') { this.min = 100; } 
+    if(this.min == null || typeof this.max != 'number') { this.min = 0; } 
+
+    if(this.max < this.min) { return console.error('Knobject.js Error: Max value cannot be higher than Min value'); }
+
     if(this.orientation == null || typeof this.orientation != 'string') { this.orientation = 'normal'; }
+    if((this.value == null || typeof this.value != 'number') && this.orientation == 'normal') 
+    { 
+        this.value = this.min;
+    }
+    if(this.orientation == 'noon')
+    {
+        if(this.defaultValue == null || typeof this.defaultValue != 'number') 
+        { 
+            if(this.min > 0)
+            {
+                this.value = (this.max - this.min)/2; 
+            }else
+            {
+               this.value = (this.max + Math.abs(this.min))/2 + this.min; 
+            } 
+        }
+        if(this.value == null || typeof this.value != 'number') 
+        { 
+            this.value = this.defaultValue; 
+        }
+    }
     if(this.step == null || typeof this.step != 'number') { this.step = 1; } 
 
     this.context = document.getElementById(this.knobId).getContext('2d');
@@ -69,8 +107,6 @@ function Knob(array) {
     return this;
 }
 Knob.prototype.capture = function(event) {
-    if(this.min == null || typeof this.max != 'number') { this.min = 100; } 
-
     var self = this;
     if(!event.altKey) {
         var x = event.clientX;
@@ -122,7 +158,7 @@ Knob.prototype.capture = function(event) {
 
             this.preRotate();
 
-            if(this.min == null || typeof this.max != 'number') { this.min = 100; } 
+            if(this.value == null || typeof this.value != 'number') { this.value = 0; } 
             if(this.orientation == null || typeof this.orientation != 'string') { this.orientation = 'normal'; }
 
             switch(this.orientation)
@@ -131,7 +167,7 @@ Knob.prototype.capture = function(event) {
                     if(this.onLeftTurn != null) {
                         if(typeof this.onCenter == 'function')
                         {
-                            this.onLeftTurn(this.knobValue);
+                            this.onLeftTurn(this.value);
                         }
                     }
                 break;
@@ -139,7 +175,7 @@ Knob.prototype.capture = function(event) {
                     if(this.onLeftTurn != null) {
                         if(typeof this.onCenter == 'function')
                         {
-                            this.onCenter(this.knobValue);
+                            this.onCenter(this.value);
                         }
                     }
                 break;
@@ -167,10 +203,11 @@ Knob.prototype.drawKnob = function() {
 }
 Knob.prototype.left = function() {
     if(this.knobValue == null || typeof this.knobValue != 'number') { this.knobValue = 0; } 
-    if(this.min == null || typeof this.max != 'number') { this.min = 100; } 
+    if(this.min == null || typeof this.min != 'number') { this.min = 0; } 
     if(this.step == null || typeof this.step != 'number') { this.step = 1; } 
 
     var value = this.orientation == 'normal' ? 0 : -100;
+
     if(this.knobValue > value) 
     {
         this.knobValue -= this.step;
@@ -179,13 +216,40 @@ Knob.prototype.left = function() {
 
         if(this.onLeftTurn != null && typeof this.onLeftTurn == 'function')
         {
-            if(this.knobValue < 0)
+            switch(this.orientation)
             {
-                var returnValue = this.centerValue - Math.abs(this.knobValue * (this.centerValue - this.min) / 100);
+                case 'normal':
+                    if(this.max > 0 && this.min >= 0)
+                    {
+                        var returnValue = this.knobValue * (this.max - this.min)/100; 
+                    }else if(this.max > 0 && this.min < 0)
+                    {
+                        var returnValue = this.knobValue * (Math.abs(this.max - this.min)/100) + this.min;
+                    }else if(this.max == 0)
+                    {
+                        var returnValue = this.knobValue * (this.max - this.min)/100 + this.min; 
+                    }else
+                    {
+                        var returnValue = this.knobValue * (Math.abs(this.max - this.min)/100) + this.min;
+                    }
+                break;
+                case 'noon':
 
-            }else
-            {
-                var returnValue = ((this.max-this.centerValue)/100 * this.knobValue) + this.centerValue;
+                    if(this.max > 0 && this.min >= 0)
+                    {
+                        //100/0
+                        var returnValue = this.knobValue * (this.max - this.min)/100;
+                    }else if(this.max > 0 && this.min < 0)
+                    {
+                        var returnValue = this.knobValue * (Math.abs(this.max - this.min)/100);
+                    }else if(this.max == 0)
+                    {
+                        var returnValue = this.knobValue * (this.max - this.min)/100; 
+                    }else
+                    {
+                        var returnValue = this.knobValue * (Math.abs(this.max - this.min)/100);
+                    }
+                break;
             }
             this.onLeftTurn(returnValue);
         }
@@ -196,7 +260,7 @@ Knob.prototype.right = function() {
     if(this.max == null || typeof this.max != 'number') { this.max = 100; } 
     if(this.step == null || typeof this.step != 'number') { this.step = 1; } 
 
-    var value = this.orientation == 'normal' ? 0 : 100;
+    var value = this.orientation == 'normal' ? 100 : 100;
     if(this.knobValue < value) 
     {
         this.knobValue += this.step;
@@ -205,12 +269,39 @@ Knob.prototype.right = function() {
 
         if(this.onRightTurn != null && typeof this.onRightTurn == 'function')
         {
-            if(this.knobValue < 0)
+            switch(this.orientation)
             {
-                var returnValue = this.centerValue - Math.abs(this.knobValue * (this.centerValue - this.min) / 100);
-            }else
-            {
-                var returnValue = (this.max-this.centerValue)/100 * this.knobValue + this.centerValue;
+                case 'normal':
+                    if(this.max > 0 && this.min >= 0)
+                    {
+                        var returnValue = this.knobValue * (this.max - this.min)/100; 
+                    }else if(this.max > 0 && this.min < 0)
+                    {
+                        var returnValue = this.knobValue * (Math.abs(this.max-this.min)/100) + this.min;
+                    }else if(this.max == 0)
+                    {
+                        var returnValue = this.knobValue * (this.max - this.min)/100 + this.min; 
+                    }else
+                    {
+                        var returnValue = this.knobValue * (Math.abs(this.max-this.min)/100) + this.min;
+                    }
+                break;
+                case 'noon':
+
+                var returnValue = (this.max - this.value)/100 * this.knobValue + this.value;
+                    /*if(this.max > 0)
+                    { 
+                        console.log('max > 0');
+                        var returnValue = (this.max - this.value)/100 * this.knobValue + this.value;
+                    }else if(this.max == 0)
+                    {
+                        var returnValue = this.value - Math.abs(this.knobValue * (this.value - this.min) / 100);
+                    }else
+                    {
+                        console.log('min < 0')
+                        var returnValue = this.value - Math.abs(this.knobValue * (this.value - this.min) / 100);
+                    }*/
+                break;
             }
             this.onRightTurn(returnValue);
         }
@@ -233,17 +324,51 @@ Knob.prototype.preRotate = function() {
         switch(this.orientation)
         {
             case 'normal': 
-                ctx.rotate(145*Math.PI/-180); 
+                if(this.min == this.value)
+                {
+                    ctx.rotate(145*Math.PI/-180);
+                }else
+                {
+                    if((this.max + this.min)/2 > 0)
+                    {
+                        if(this.min <= 0)
+                        {
+                            var rotation = 50 - ((this.max - this.value)/Math.abs(this.max - this.min) * 100);
+                            ctx.rotate(rotation * 2.9 * Math.PI/180);
+                            this.knobValue = 100 - (100 * (this.max - this.value)/(this.max-this.min));
+                            console.log(this.knobValue, this.knobId, rotation);
+                        }
+                    }else 
+                    {
+                        if(this.max > 0)
+                        {
+                            var rotation = (-100 + ((this.max - this.value)/Math.abs(this.max - this.min)) * 100) + 50;
+                            ctx.rotate(rotation * 2.9 * Math.PI/-180);
+                            this.knobValue = 100 - ((this.max - this.value)/Math.abs(this.max-this.min)*100);
+                            console.log(this.knobValue, this.knobId, rotation);
+                        }else if(this.max == 0)
+                        {
+                            var rotation = (-100 + (this.value/(this.max + this.min)) * 100) + 50;
+                            ctx.rotate(rotation * 2.9 * Math.PI/-180);
+                            this.knobValue = 100 - ((this.max - this.value)/Math.abs(this.max-this.min)*100);
+                            console.log(this.knobValue, this.knobId, rotation);
+                        }else
+                        {
+                            var rotation = (-100 + ((this.max - this.value)/Math.abs(this.max - this.min) * 100)) + 50;
+                            ctx.rotate(rotation * 2.9 * Math.PI/-180);
+                            this.knobValue = 100 - (100 * (this.max - this.value)/Math.abs(this.max-this.min));
+                            console.log(this.knobValue, this.knobId, rotation);
+                        }
+                    }
+                }
             break;
             case 'noon':
                 if(this.knobValue < 0)
                 {
-                    console.log('this1');
                     ctx.rotate(Math.abs(this.knobValue)*145/Math.abs(this.min)*Math.PI/-180);
                 }
                 if(this.knobValue > 0) 
                 {
-                    console.log('this2', this.knobId, this.knobValue);
                     ctx.rotate(Math.abs(this.knobValue)*145/Math.abs(this.min)*Math.PI/180);
                 }
             break;
@@ -267,7 +392,13 @@ Knob.prototype.rotate = function(direction) {
         switch(this.orientation)
         {
             case 'normal':
-                direction == 'left' ? ctx.rotate((290/(this.max-this.min))*Math.PI/-180) : ctx.rotate((290/(this.max-this.min))*Math.PI/180);
+                if(Math.abs(this.min) == Math.abs(this.max))
+                {
+                    direction == 'left' ? ctx.rotate(2.9*Math.PI/-180) : ctx.rotate(2.9*Math.PI/180)
+                }else
+                {
+                    direction == 'left' ? ctx.rotate(2.9*Math.PI/-180) : ctx.rotate(2.9*Math.PI/180);
+                } 
             break;
             case 'noon':
                 direction == 'left' ? ctx.rotate(1.45*Math.PI/-180) : ctx.rotate(1.45*Math.PI/180);

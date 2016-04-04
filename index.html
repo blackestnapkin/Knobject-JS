@@ -74,9 +74,15 @@
 				</div>
 				<div class="col-md-5">
 					<p style="margin-top:50px;">Voila, our knob is created and is ready to be twisted.</p>
-					<div style="width:150px;height:100px;margin:auto;border:1px solid #000;">
-						<div id="knobContainer1" class="knobContainers"></div>
-						<div id="value1" class="value">20</div>
+					<div style="width:150px;height:350px;margin:auto;border:1px solid #000;">
+						<div id="knobContainer1" class="knobContainers">1</div>
+						<div id="value1" class="value"></div>
+						<div id="knobContainer2" class="knobContainers">2</div>
+						<div id="value2" class="value"></div>
+						<div id="knobContainer3" class="knobContainers">3</div>
+						<div id="value3" class="value"></div>
+						<div id="knobContainer4" class="knobContainers">4</div>
+						<div id="value4" class="value"></div>
 					</div>
 				</div>
 			</div>
@@ -125,9 +131,17 @@
 				</div>
 				<div class="col-md-5">
 					<p style="margin-top:50px;">Voila, our knob is created and is ready to be twisted.</p>
-					<div style="width:150px;height:100px;margin:auto;border:1px solid #000;">
-						<div id="knobContainer2" class="knobContainers"></div>
-						<div id="value2" class="value">100</div>
+					<div style="width:150px;height:350px;margin:auto;border:1px solid #000;">
+						<div id="knobContainer5" class="knobContainers">5</div>
+						<div id="value5" class="value"></div>
+						<div id="knobContainer6" class="knobContainers">6</div>
+						<div id="value6" class="value"></div>
+						<div id="knobContainer7" class="knobContainers">7</div>
+						<div id="value7" class="value"></div>
+						<div id="knobContainer8" class="knobContainers">8</div>
+						<div id="value8" class="value"></div>
+
+
 					</div>
 				</div>
 			</div>
@@ -139,9 +153,9 @@
 var options1 = {
 	containerId: 'knobContainer1',
 	knobId: 'knob1',
-	knobValue:20,
-	max:500,
-	min:20,
+	min: 0,
+	max: 100,
+	value: 25,
 	onLeftTurn: function(value) {
 		document.getElementById('value1').innerHTML = value;
 	},
@@ -150,27 +164,133 @@ var options1 = {
 	}
 }
 
-//var knob1 = new Knob(options1);
+var knob1 = new Knob(options1);
 
 var options2 = {
 	containerId: 'knobContainer2',
 	knobId: 'knob2',
-	min: 20,
-	max: 1000,
-	centerValue: 100,
-	orientation: 'noon',
+	min: -300,
+	max: 100,
+	value: -200,
 	onLeftTurn: function(value) {
 		document.getElementById('value2').innerHTML = value;
 	},
 	onRightTurn: function(value) {
-		document.getElementById('value2').innerHTML = value;
-	},
-	onCenter: function(value) {
 		document.getElementById('value2').innerHTML = value;
 	}
 }
 
 var knob2 = new Knob(options2);
+
+var options3 = {
+	containerId: 'knobContainer3',
+	knobId: 'knob3',
+	min: -800,
+	max: 0,
+	value: -600,
+	onLeftTurn: function(value) {
+		document.getElementById('value3').innerHTML = value;
+	},
+	onRightTurn: function(value) {
+		document.getElementById('value3').innerHTML = value;
+	}
+}
+
+var knob3 = new Knob(options3);
+
+var options4 = {
+	containerId: 'knobContainer4',
+	knobId: 'knob4',
+	min: -200,
+	max: -100,
+	value: -175,
+	onLeftTurn: function(value) {
+		document.getElementById('value4').innerHTML = value;
+	},
+	onRightTurn: function(value) {
+		document.getElementById('value4').innerHTML = value;
+	}
+}
+
+var knob4 = new Knob(options4);
+
+var options5 = {
+	containerId: 'knobContainer5',
+	knobId: 'knob5',
+	min: 0,
+	max: 100,
+	orientation: 'noon',
+	defaultValue: 25,
+	onLeftTurn: function(value) {
+		document.getElementById('value5').innerHTML = value;
+	},
+	onRightTurn: function(value) {
+		document.getElementById('value5').innerHTML = value;
+	}
+}
+
+var knob5 = new Knob(options5);
+
+var options6 = {
+	containerId: 'knobContainer6',
+	knobId: 'knob6',
+	min: -300,
+	max: 100,
+	orientation: 'noon',
+	defaultValue: -200,
+	onLeftTurn: function(value) {
+		document.getElementById('value6').innerHTML = value;
+	},
+	onRightTurn: function(value) {
+		document.getElementById('value6').innerHTML = value;
+	}
+}
+
+var knob6 = new Knob(options6);
+
+var options7 = {
+	containerId: 'knobContainer7',
+	knobId: 'knob7',
+	min: -800,
+	max: 0,
+	orientation: 'noon',
+	defaultValue: -600,
+	onLeftTurn: function(value) {
+		document.getElementById('value7').innerHTML = value;
+	},
+	onRightTurn: function(value) {
+		document.getElementById('value7').innerHTML = value;
+	}
+}
+
+var knob7 = new Knob(options7);
+
+var options8 = {
+	containerId: 'knobContainer8',
+	knobId: 'knob8',
+	min: -200,
+	max: -100,
+	orientation: 'noon',
+	defaultValue: -175,
+	onLeftTurn: function(value) {
+		document.getElementById('value8').innerHTML = value;
+	},
+	onRightTurn: function(value) {
+		document.getElementById('value8').innerHTML = value;
+	}
+}
+
+var knob8 = new Knob(options8);
+
+document.getElementById('value1').innerHTML = knob1.value;
+document.getElementById('value2').innerHTML = knob2.value;
+document.getElementById('value3').innerHTML = knob3.value;
+document.getElementById('value4').innerHTML = knob4.value;
+
+document.getElementById('value5').innerHTML = knob5.defaultValue;
+document.getElementById('value6').innerHTML = knob6.defaultValue;
+document.getElementById('value7').innerHTML = knob7.defaultValue;
+document.getElementById('value8').innerHTML = knob8.defaultValue;
 </script>
 
 <!-- Latest compiled and minified jQuery -->
