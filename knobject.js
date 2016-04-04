@@ -221,37 +221,30 @@ Knob.prototype.left = function() {
                 case 'normal':
                     if(this.max > 0 && this.min >= 0)
                     {
-                        var returnValue = this.knobValue * (this.max - this.min)/100; 
+                        this.value = this.knobValue * (this.max - this.min)/100; 
                     }else if(this.max > 0 && this.min < 0)
                     {
-                        var returnValue = this.knobValue * (Math.abs(this.max - this.min)/100) + this.min;
+                        this.value = this.knobValue * (Math.abs(this.max - this.min)/100) + this.min;
                     }else if(this.max == 0)
                     {
-                        var returnValue = this.knobValue * (this.max - this.min)/100 + this.min; 
+                        this.value = this.knobValue * (this.max - this.min)/100 + this.min; 
                     }else
                     {
-                        var returnValue = this.knobValue * (Math.abs(this.max - this.min)/100) + this.min;
+                        this.value = this.knobValue * (Math.abs(this.max - this.min)/100) + this.min;
                     }
                 break;
                 case 'noon':
-
-                    if(this.max > 0 && this.min >= 0)
+                    if(this.knobValue >= 0)
                     {
-                        //100/0
-                        var returnValue = this.knobValue * (this.max - this.min)/100;
-                    }else if(this.max > 0 && this.min < 0)
-                    {
-                        var returnValue = this.knobValue * (Math.abs(this.max - this.min)/100);
-                    }else if(this.max == 0)
-                    {
-                        var returnValue = this.knobValue * (this.max - this.min)/100; 
+                        this.value = (this.max - this.defaultValue)/100 * this.knobValue + this.defaultValue;
                     }else
                     {
-                        var returnValue = this.knobValue * (Math.abs(this.max - this.min)/100);
+                        this.value = (this.defaultValue - this.min)/100 * this.knobValue + this.defaultValue;
                     }
+
                 break;
             }
-            this.onLeftTurn(returnValue);
+            this.onLeftTurn(this.value);
         }
     }
 }
@@ -274,36 +267,29 @@ Knob.prototype.right = function() {
                 case 'normal':
                     if(this.max > 0 && this.min >= 0)
                     {
-                        var returnValue = this.knobValue * (this.max - this.min)/100; 
+                        this.value = this.knobValue * (this.max - this.min)/100; 
                     }else if(this.max > 0 && this.min < 0)
                     {
-                        var returnValue = this.knobValue * (Math.abs(this.max-this.min)/100) + this.min;
+                        this.value = this.knobValue * (Math.abs(this.max-this.min)/100) + this.min;
                     }else if(this.max == 0)
                     {
-                        var returnValue = this.knobValue * (this.max - this.min)/100 + this.min; 
+                        this.value = this.knobValue * (this.max - this.min)/100 + this.min; 
                     }else
                     {
-                        var returnValue = this.knobValue * (Math.abs(this.max-this.min)/100) + this.min;
+                        this.value = this.knobValue * (Math.abs(this.max-this.min)/100) + this.min;
                     }
                 break;
                 case 'noon':
-
-                var returnValue = (this.max - this.value)/100 * this.knobValue + this.value;
-                    /*if(this.max > 0)
-                    { 
-                        console.log('max > 0');
-                        var returnValue = (this.max - this.value)/100 * this.knobValue + this.value;
-                    }else if(this.max == 0)
+                    if(this.knobValue >= 0)
                     {
-                        var returnValue = this.value - Math.abs(this.knobValue * (this.value - this.min) / 100);
+                        this.value = (this.max - this.defaultValue)/100 * this.knobValue + this.defaultValue;
                     }else
                     {
-                        console.log('min < 0')
-                        var returnValue = this.value - Math.abs(this.knobValue * (this.value - this.min) / 100);
-                    }*/
+                        this.value = (this.defaultValue - this.min)/100 * this.knobValue + this.defaultValue;
+                    }
                 break;
             }
-            this.onRightTurn(returnValue);
+            this.onRightTurn(this.value);
         }
     }
 }
