@@ -20,70 +20,170 @@
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-body text">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<h4>Parameters:</h4>
-					<p><strong>defaultValue:</strong> the the default position of the knobrelative to your min and max</p>
-					<p><strong>diameter:</strong> the diameter of the knob in pixels; the default is '50px'</p>
-					<p><strong>knobContainer:</strong> the id of the div housing the knob</p>
-					<p><strong>knobId:</strong> the id of the canvas generated for the knob</p>
-					<p><strong>max:</strong> the maximum value that 'value' can have</p>
-					<p><strong>min:</strong> the minimum value that 'value' can have</p>
-					<p><strong>onCenter:</strong> the function called when the knob is reset(by alt/option clicking), knobValue is passed as argument</p>
-					<p style="font-face:courier;"><strong>&nbsp; NOTE: onCenter will only be called if knob orientaion is 'centered'</strong></p>
-					<p><strong>onLeftTurn:</strong> the function called when the knob is turned left, knobValue is passed as argument</p>
-					<p><strong>onRightTurn:</strong> the function called when the knob is turned right, knobValue is passed as argument</p>
-					<p><strong>orientation:</strong> defines whether the knob's default position is all the way down ('normal') or upright ('centered')</p>
-					<p><strong>value:</strong> the position of the knob</p>
+				<div class="col-md-1"></div>
+				<div class="col-md-10">
+					Knobject.js is a widget for implementing knobs as html inputs. It works similarly to the html input type range, with a couple of exceptions.
+					It allows you to define independent custom function for turns to the left and right. You can also define the value which the knob is turned to
+					when the page loads which moves the position. Knobs come in two modes, 'normal' and 'centered'. The default orientation of the knobs, 'normal' 
+					treat the min value as the default value, which the knob is twisted all the way to the bottom-left. The other orientation of the knobs, 'centered', treats 'defaultValue' as the default/centered value; it also allows for a function that happens when the knob is centered. 
+					Alt(Windows)/Option(Mac)-clicking resets the knob to its default value.
+					<br/>
+					<br/>
+					<a href="Knobject.js" download="knobject"><button class="btn btn-primary">Download Knobject.js</button></a>
 				</div>
-				<div class="col-md-2"></div>
+				<div class="col-md-1"></div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body text">
+				<div class="col-md-1"></div>
+				<div class="col-md-10">
+					<div class="table-responsive">          
+					  	<table class="table table-hover">
+					    	<thead>
+					      		<tr>
+					        		<th>Parameter</th>
+					        		<th>Type</th>
+					        		<th>Description</th>
+					        		<th>Default Value</th>
+					      		</tr>
+					    	</thead>
+					    	<tbody class="left-align">
+					    		<tr>
+					        		<td>color</td>
+					        		<td>String</td>
+					        		<td>'rgb(126,38,36)'</td>
+					        		<td>the color of the knob</td>
+					      		</tr>
+					      		<tr>
+					        		<td>defaultValue</td>
+					        		<td>Number</td>
+					        		<td>mean of min and max</td>
+					        		<td>this is the value the knob when centered (for orientation: 'centered' only)</td>
+					      		</tr>
+					      		<tr>
+					        		<td>diameter</td>
+					        		<td>String</td>
+					        		<td>'50px'</td>
+					        		<td>the height and width of the knob</td>
+					      		</tr>
+					      		<tr>
+					        		<td>knobContainer</td>
+					        		<td>String</td>
+					        		<td>'knobContainer'</td>
+					        		<td>the id of the container for the knob</td>
+					      		</tr>
+					      		<tr>
+					        		<td>knobId</td>
+					        		<td>String</td>
+					        		<td>'knob'</td>
+					        		<td>the id of the knob</td>
+					      		</tr>
+					      		<tr>
+					        		<td>markerColor</td>
+					        		<td>String</td>
+					        		<td>'black'</td>
+					        		<td>the color of line indicator in the middle of the knob</td>
+					      		</tr>
+					      		<tr>
+					        		<td>max</td>
+					        		<td>Number</td>
+					        		<td>100</td>
+					        		<td>the maximum 'value' of the knob</td>
+					      		</tr>
+					      		<tr>
+					        		<td>min</td>
+					        		<td>Number</td>
+					        		<td>0</td>
+					        		<td>the minimum 'value' of the knob</td>
+					      		</tr>
+					      		<tr>
+					        		<td>orientation</td>
+					        		<td>String</td>
+					        		<td>'normal'</td>
+					        		<td>dictates the default position; bottom-left ('normal') or upright ('centered')</td>
+					      		</tr>
+					      		<tr>
+					        		<td>onCenter</td>
+					        		<td>Function</td>
+					        		<td>'console.log(value)'</td>
+					        		<td>dictates the default position; bottom-left ('normal') or upright ('centered')</td>
+					      		</tr>
+					      		<tr>
+					        		<td>onLeftTurn</td>
+					        		<td>Function</td>
+					        		<td>'console.log(value)'</td>
+					        		<td>dictates the default position; bottom-left ('normal') or upright ('centered')</td>
+					      		</tr>
+					      		<tr>
+					        		<td>onRightTurn</td>
+					        		<td>Function</td>
+					        		<td>'console.log(value)'</td>
+					        		<td>dictates the default position; bottom-left ('normal') or upright ('centered')</td>
+					      		</tr>
+					      		<tr>
+					        		<td>value</td>
+					        		<td>Number</td>
+					        		<td>min</td>
+					        		<td>dictates the default position; bottom-left ('normal') or upright ('centered')</td>
+					      		</tr>
+					    	</tbody>
+					  </table>
+					</div>
+				</div>
+				<div class="col-md-1"></div>
 			</div>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-body text">
 				<div class="col-md-1"></div>
 				<div class="col-md-6">
+					<h4>A Knob with 'normal' orientation:</h4>
 					<div class="code">
 						<div>&lt;body&gt;</div>
-						<div>&lt;div id="knobContainer"&gt;&lt;/div&gt;</div>
-						<div>&lt;div id="value"&gt;0&lt;/div&gt;</div>
+						<div>&lt;div id="knobContainer1"&gt;&lt;/div&gt;</div>
+						<div>&lt;div id="value1"&gt;0&lt;/div&gt;</div>
 						</br>
 						<div>&lt;script&gt;</div>
-						<div>var array = { 
+						<div>var parameters1 = { 
 							<br/>
-							&nbsp; containerId: 'knobContainer', 
+							&nbsp; containerId: 'knobContainer1', 
 							<br/>
-							&nbsp; knobId: 'knob', 
+							&nbsp; knobId: 'knob1', 
+							<br/>
+							&nbsp; orientation: 'normal',
+							<br/>
+							&nbsp; max: 100,
+							<br/>
+							&nbsp; min: 0,
 							<br/>
 							&nbsp; onLeftTurn: function(value) {
 							<br/>
-							&nbsp; &nbsp; document.getElementById('value').innerHTML = value; 
+							&nbsp; &nbsp; document.getElementById('value1').innerHTML = value; 
 							<br/>
 							&nbsp; },
 							<br/>
 							&nbsp; onRightTurn: function() { 
 							<br/>
-							&nbsp; &nbsp; document.getElementById('value').innerHTML = value; 
+							&nbsp; &nbsp; document.getElementById('value1').innerHTML = value; 
 							<br/>
 							&nbsp; }
 							<br/>
 						</div>
-						<div>var knob = new Knob(options);</div>
+						<div>var knob1 = new Knob(parameters1);</div>
 						<div>&lt;/script&gt;</div>
 						<div>&lt;/body&gt;</div>
 					</div>
 				</div>
 				<div class="col-md-5">
-					<p style="margin-top:50px;">Voila, our knob is created and is ready to be twisted.</p>
-					<div style="width:150px;height:350px;margin:auto;border:1px solid #000;">
-						<div id="knobContainer1" class="knobContainers">1</div>
-						<div id="value1" class="value"></div>
-						<div id="knobContainer2" class="knobContainers">2</div>
-						<div id="value2" class="value"></div>
-						<div id="knobContainer3" class="knobContainers">3</div>
-						<div id="value3" class="value"></div>
-						<div id="knobContainer4" class="knobContainers">4</div>
-						<div id="value4" class="value"></div>
+					<br/>
+					<br/>
+					This knob goes from 0-100, and our left and right functions both output the knob's 'value' to the value div below:
+					<div id="knobContainer1" class="knobContainers"></div>
+					<br/>
+					<br/>
+					<div id="value1_container" class="valueContainer select">
+						<span id="value1" class="value"></span>
 					</div>
 				</div>
 			</div>
@@ -92,81 +192,111 @@
 			<div class="panel-body text">
 				<div class="col-md-1"></div>
 				<div class="col-md-6">
+					<h4>A Knob with 'centered' orientation:</h4>
 					<div class="code">
 						<div>&lt;body&gt;</div>
-						<div>&lt;div id="knobContainer"&gt;&lt;/div&gt;</div>
-						<div>&lt;div id="value"&gt;0&lt;/div&gt;</div>
+						<div>&lt;div id="knobContainer2"&gt;&lt;/div&gt;</div>
+						<div>&lt;div id="value2"&gt;0&lt;/div&gt;</div>
 						</br>
 						<div>&lt;script&gt;</div>
-						<div>var array = { 
+						<div>var parameters2 = { 
 							<br/>
-							&nbsp; containerId: 'knobContainer', 
+							&nbsp; containerId: 'knobContainer2', 
 							<br/>
-							&nbsp; knobId: 'knob', 
+							&nbsp; knobId: 'knob2', 
+							<br/>
+							&nbsp; orientation: 'centered',
+							<br/>
+							&nbsp; max: 100,
 							<br/>
 							&nbsp; min: -100,
 							<br/>
 							&nbsp; onLeftTurn: function(value) {
 							<br/>
-							&nbsp; &nbsp; document.getElementById('value').innerHTML = value; 
+							&nbsp; &nbsp; document.getElementById('value2').innerHTML = value; 
 							<br/>
 							&nbsp; },
 							<br/>
 							&nbsp; onRightTurn: function() { 
 							<br/>
-							&nbsp; &nbsp; document.getElementById('value').innerHTML = value; 
+							&nbsp; &nbsp; document.getElementById('value2').innerHTML = value; 
 							<br/>
 							&nbsp; },
 							<br/>
 							&nbsp; onCenter: function() { 
 							<br/>
-							&nbsp; &nbsp; document.getElementById('value').innerHTML = value; 
+							&nbsp; &nbsp; document.getElementById('value2').innerHTML = value; 
 							<br/>
 							&nbsp; }
 							<br/>
 						</div>
-						<div>var knob = new Knob(options);</div>
+						<div>var knob2 = new Knob(parameters2);</div>
 						<div>&lt;/script&gt;</div>
 						<div>&lt;/body&gt;</div>
 					</div>
 				</div>
 				<div class="col-md-5">
-					<p style="margin-top:50px;">Voila, our knob is created and is ready to be twisted.</p>
-					<div style="width:150px;height:350px;margin:auto;border:1px solid #000;">
-						<div id="knobContainer5" class="knobContainers">5</div>
-						<div id="value5" class="value"></div>
-						<div id="knobContainer6" class="knobContainers">6</div>
-						<div id="value6" class="value"></div>
-						<div id="knobContainer7" class="knobContainers">7</div>
-						<div id="value7" class="value"></div>
-						<div id="knobContainer8" class="knobContainers">8</div>
-						<div id="value8" class="value"></div>
-
-
+					<br/>
+					<br/>
+					This knob goes from -100 to 100, and our defaultValue is 0. Our left, right, and center functions all output the knob's 'value' to the 
+					value div below:
+					<div id="knobContainer2" class="knobContainers"></div>
+					<br/>
+					<br/>
+					<div id="value2_container" class="valueContainer select">
+						<span id="value2" class="value"></span>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-body text">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<div id="realKnobContainer"></div>
-					<div id="realValue" class="value"></div>
+				<div class="col-md-4 borders">
+					<div id="knobContainer3"></div>
+					<div ic="value3_container" class="valueContainer select">
+						<div id="value3" class="value"></div>
+					</div>
 				</div>
-				<div class="col-md-2"></div>
+				<div class="col-md-4 borders">
+					<div id="knobContainer4"></div>
+					<div ic="value4_container" class="valueContainer select">
+						<div id="value4" class="value"></div>
+					</div>
+				</div>
+				<div class="col-md-4 borders">
+					<div id="knobContainer5"></div>
+					<div ic="value5_container" class="valueContainer select">
+						<div id="value5" class="value"></div>
+					</div>
+				</div>
+				<div class="col-md-4 borders">
+					<div id="knobContainer6"></div>
+					<div ic="value6_container" class="valueContainer select">
+						<div id="value6" class="value"></div>
+					</div>
+				</div>
+				<div class="col-md-4 borders">
+					<div id="knobContainer7"></div>
+					<div ic="value7_container" class="valueContainer select">
+						<div id="value7" class="value"></div>
+					</div>
+				</div>
+				<div class="col-md-4 borders">
+					<div id="knobContainer8"></div>
+					<div ic="value8_container" class="valueContainer select">
+						<div id="value8" class="value"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 
 <script>
 
-var options1 = {
+var parameters1 = {
 	containerId: 'knobContainer1',
 	knobId: 'knob1',
-	min: 0,
-	max: 100,
-	defaultValue: 25,
+	diameter: 200,
 	onLeftTurn: function(value) {
 		document.getElementById('value1').innerHTML = value;
 	},
@@ -175,63 +305,76 @@ var options1 = {
 	}
 }
 
-var knob1 = new Knob(options1);
+var knob1 = new Knob(parameters1);
 
-var options2 = {
+var parameters2 = {
 	containerId: 'knobContainer2',
 	knobId: 'knob2',
-	min: -300,
+	diameter: 200,
+	orientation: 'centered',
 	max: 100,
-	defaultValue: -200,
+	min: -100,
 	onLeftTurn: function(value) {
 		document.getElementById('value2').innerHTML = value;
 	},
 	onRightTurn: function(value) {
 		document.getElementById('value2').innerHTML = value;
+	},
+	onCenter: function(value) {
+		document.getElementById('value2').innerHTML = value;
 	}
 }
 
-var knob2 = new Knob(options2);
+var knob2 = new Knob(parameters2);
 
-var options3 = {
+var parameters3 = {
 	containerId: 'knobContainer3',
 	knobId: 'knob3',
-	min: -800,
+	diameter: 50,
+	color: 'red',
 	max: 0,
-	defaultValue: -600,
+	min: -100,
 	onLeftTurn: function(value) {
 		document.getElementById('value3').innerHTML = value;
 	},
 	onRightTurn: function(value) {
 		document.getElementById('value3').innerHTML = value;
+	},
+	onCenter: function(value) {
+		document.getElementById('value3').innerHTML = value;
 	}
 }
 
-var knob3 = new Knob(options3);
+var knob3 = new Knob(parameters3);
 
-var options4 = {
+var parameters4 = {
 	containerId: 'knobContainer4',
 	knobId: 'knob4',
-	min: -200,
-	max: -100,
-	defaultValue: -175,
+	diameter: 75,
+	color: 'green',
+	max: -500,
+	min: -1000,
 	onLeftTurn: function(value) {
 		document.getElementById('value4').innerHTML = value;
 	},
 	onRightTurn: function(value) {
 		document.getElementById('value4').innerHTML = value;
+	},
+	onCenter: function(value) {
+		document.getElementById('value4').innerHTML = value;
 	}
 }
 
-var knob4 = new Knob(options4);
+var knob4 = new Knob(parameters4);
 
-var options5 = {
+var parameters5 = {
 	containerId: 'knobContainer5',
 	knobId: 'knob5',
+	diameter: 50,
+	color: 'rgb(70,150,123)',
+	max: 50,
 	min: 0,
-	max: 100,
 	orientation: 'centered',
-	defaultValue: 25,
 	onLeftTurn: function(value) {
 		document.getElementById('value5').innerHTML = value;
 	},
@@ -243,15 +386,15 @@ var options5 = {
 	}
 }
 
-var knob5 = new Knob(options5);
+var knob5 = new Knob(parameters5);
 
-var options6 = {
+var parameters6 = {
 	containerId: 'knobContainer6',
 	knobId: 'knob6',
-	min: -300,
-	max: 100,
-	orientation: 'centered',
-	defaultValue: -200,
+	diameter: 20,
+	color: 'black',
+	max: 0,
+	min: -100,
 	onLeftTurn: function(value) {
 		document.getElementById('value6').innerHTML = value;
 	},
@@ -263,15 +406,17 @@ var options6 = {
 	}
 }
 
-var knob6 = new Knob(options6);
+var knob6 = new Knob(parameters6);
 
-var options7 = {
+var parameters7 = {
 	containerId: 'knobContainer7',
 	knobId: 'knob7',
-	min: -800,
-	max: 0,
+	diameter: 50,
+	color: 'purple',
+	max: 100,
+	min: 0,
+	defaultValue: 90,
 	orientation: 'centered',
-	defaultValue: -600,
 	onLeftTurn: function(value) {
 		document.getElementById('value7').innerHTML = value;
 	},
@@ -283,59 +428,36 @@ var options7 = {
 	}
 }
 
-var knob7 = new Knob(options7);
+var knob7 = new Knob(parameters7);
 
-var options8 = {
+var parameters8 = {
 	containerId: 'knobContainer8',
 	knobId: 'knob8',
-	min: -200,
-	max: -100,
-	orientation: 'centered',
-	defaultValue: -175,
-	onLeftTurn: function(value) {
-		document.getElementById('value8').innerHTML = value;
-	},
-	onRightTurn: function(value) {
-		document.getElementById('value8').innerHTML = value;
-	},
-	onCenter: function(value) {
-		document.getElementById('value8').innerHTML = value;
-	}
-}
-
-var knob8 = new Knob(options8);
-
-document.getElementById('value1').innerHTML = knob1.defaultValue;
-document.getElementById('value2').innerHTML = knob2.defaultValue;
-document.getElementById('value3').innerHTML = knob3.defaultValue;
-document.getElementById('value4').innerHTML = knob4.defaultValue;
-
-document.getElementById('value5').innerHTML = knob5.defaultValue;
-document.getElementById('value6').innerHTML = knob6.defaultValue;
-document.getElementById('value7').innerHTML = knob7.defaultValue;
-document.getElementById('value8').innerHTML = knob8.defaultValue;
-
-var options9 = {
-	containerId: 'realKnobContainer',
-	knobId: 'realKnob',
-	max: null,
+	diameter: 50,
+	color: 'orange',
+	max: 0,
 	min: -100,
-	defaultValue: null,
-	step: null,
 	onLeftTurn: function(value) {
-		document.getElementById('realValue').innerHTML = value;
+		document.getElementById('value8').innerHTML = value;
 	},
 	onRightTurn: function(value) {
-		document.getElementById('realValue').innerHTML = value;
+		document.getElementById('value8').innerHTML = value;
 	},
 	onCenter: function(value) {
-		document.getElementById('realValue').innerHTML = value;
+		document.getElementById('value8').innerHTML = value;
 	}
 }
 
-var knob9 = new Knob(options9);
+var knob8 = new Knob(parameters8);
 
-document.getElementById('realValue').innerHTML = knob9.defaultValue;
+document.getElementById('value1').innerHTML = knob1.value;
+document.getElementById('value2').innerHTML = knob2.value;
+document.getElementById('value3').innerHTML = knob3.value;
+document.getElementById('value4').innerHTML = knob4.value;
+document.getElementById('value5').innerHTML = knob5.value;
+document.getElementById('value6').innerHTML = knob6.value;
+document.getElementById('value7').innerHTML = knob7.value;
+document.getElementById('value8').innerHTML = knob8.value;
 
 </script>
 
