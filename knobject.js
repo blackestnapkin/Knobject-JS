@@ -15,7 +15,7 @@ function Knob(array) {
     this.onRightTurn = function(value) {
         console.log(value);
     }
-    this.onCenter = function(value) {
+    this.onReset = function(value) {
         console.log(value);
     }
     for(var key in array)
@@ -23,7 +23,7 @@ function Knob(array) {
         if(array.hasOwnProperty(key))
         {
             if(array[key] != null) 
-            {   
+            {    
                 this[key] = array[key]; 
             }
         }
@@ -114,7 +114,7 @@ function Knob(array) {
     if(this.value < this.min) { this.value = this.min; }
 
     this.context = document.getElementById(this.knobId).getContext('2d');
-    
+
     this.preRotate();
 
     return this;
@@ -200,26 +200,21 @@ Knob.prototype.capture = function(event) {
 
             this.preRotate();
 
-            if(this.orientation == null || typeof this.orientation != 'string') { this.orientation = 'normal'; }
-
-            switch(this.orientation)
+            if(this.onReset != null) 
             {
-                case 'normal': 
-                    if(this.onLeftTurn != null) {
-                        if(typeof this.onCenter == 'function')
-                        {
-                            this.onLeftTurn(this.defaultValue);
-                        }
-                    }
-                break;
-                case 'centered':
-                    if(this.onLeftTurn != null) {
-                        if(typeof this.onCenter == 'function')
-                        {
-                            this.onCenter(this.defaultValue);
-                        }
-                    }
-                break;
+                if(typeof this.onReset == 'function')
+                {
+                    this.onReset(this.defaultValue);
+                }else
+                {
+                    console.error('Knobject.js Error: this.onReset is not a function')
+                }
+            }else
+            {
+                if(typeof this.onLeftTurn == 'function')
+                {
+                    this.onLeftTurn(this.defaultValue);
+                }
             }
         }
     }
@@ -229,17 +224,7 @@ Knob.prototype.drawKnob = function() {
     {
         if(this.color == null || typeof this.color != 'string') { this.color = 'rgb(126,38,36)'; }
         if(this.diameter == null || typeof this.diameter != 'number') { this.diameter = 50; } 
-        
-        if(this.markerColor == null || this.markerColor != 'string')
-        {
-            if(this.color == '#000' || this.color == '#000000' || this.color == 'rgb(0,0,0)' || this.color == 'black')
-            {
-                this.markerColor = 'white';
-            }else 
-            {
-                this.markerColor = 'black';
-            }
-        }
+        if(this.markerColor == null || typeof this.markerColor != 'string') { this.markerColor = 'black'; }
 
         var ctx = this.context;
         ctx.beginPath();
@@ -265,8 +250,6 @@ Knob.prototype.left = function() {
     if(this.knobValue > value) 
     {
         this.knobValue -= this.STEP;
-        this.rotate('left');
-        this.drawKnob();
 
         if(this.onLeftTurn != null && typeof this.onLeftTurn == 'function')
         {
@@ -303,6 +286,8 @@ Knob.prototype.left = function() {
         {
             console.error('Knobect.js Error: this.onLeftTurn is not a function')
         }
+        this.rotate('left');
+        this.drawKnob();
     }
 }
 Knob.prototype.right = function() {
@@ -314,8 +299,6 @@ Knob.prototype.right = function() {
     if(this.knobValue < value) 
     {
         this.knobValue += this.STEP;
-        this.rotate('right');
-        this.drawKnob();
 
         if(this.onRightTurn != null && typeof this.onRightTurn == 'function')
         {
@@ -351,6 +334,8 @@ Knob.prototype.right = function() {
         {
             console.error('Knobect.js Error: this.onRightTurn is not a function')
         }
+        this.rotate('right');
+        this.drawKnob();
     }
 }
 Knob.prototype.preRotate = function() {
