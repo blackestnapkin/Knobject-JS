@@ -1,6 +1,7 @@
 function Knob(array) {
     var self = this;
 
+    this.axis = true;
     this.color = 'rgb(126,38,36)';
     this.diameter = 50;
     this.knobValue = 0;
@@ -28,6 +29,8 @@ function Knob(array) {
             }
         }
     }
+
+    if(this.axis == null || typeof this.axis != 'boolean') { this.axis = true; }
 
     if(this.color == null || typeof this.color != 'string') { console.error('Knobject Error: this.color must be a string'); }
     
@@ -127,7 +130,16 @@ Knob.prototype.capture = function(event) {
         function knobUpdate(event) {
             var newX = event.clientX;
             var newY = event.clientY;
-            if(newY < y) 
+            if(self.axis)
+            {
+                var greaterThan = newX > x;
+                var lessThan = newX < x;
+            }else
+            {
+                var greaterThan = newY < y;
+                var lessThan = newY > y;
+            }
+            if(greaterThan) 
             {
                 if(self.orientation == 'normal')
                 {
@@ -155,7 +167,7 @@ Knob.prototype.capture = function(event) {
             y = newY;
             x = newX;
             }
-            if(newY > y) 
+            if(lessThan) 
             {
                 if(self.orientation == 'normal')
                 {

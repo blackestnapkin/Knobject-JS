@@ -22,11 +22,12 @@
 			<div class="panel-body text">
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
-					Knobject.js is a widget for implementing knobs as html inputs. It works similarly to the html input type range, with a couple of exceptions.
-					It allows you to define independent custom function for turns to the left and right. You can also define the value which the knob is turned to
-					when the page loads which moves the position. Knobs come in two modes, 'normal' and 'centered'. The default orientation of the knobs, 'normal' 
-					treat the min value as the default value, which the knob is twisted all the way to the bottom-left. The other orientation of the knobs, 'centered', treats 'defaultValue' as the default/centered value; it also allows for a function that happens when the knob is centered. 
-					Alt(Windows)/Option(Mac)-clicking resets the knob to its default value.
+					Knobject.js lets you create a knob components. These components work similarly to the HTML range input. It allows you to define independent 
+					custom function for turns to the left and right. You can also define the value which the knob is turned to when the page loads which moves the 
+					position. Knobs come in two modes, 'normal' and 'centered'. The default orientation of the knobs, 'normal' treat the min value as the default
+					value, which the knob is twisted all the way to the bottom-left. The other orientation of the knobs, 'centered', treats 'defaultValue' as the
+					default/centered value; it also allows for a function that happens when the knob is centered. Alt(Windows)/Option(Mac)-clicking resets the
+					knob to its default value.
 					<br/>
 					<br/>
 					<a href="Knobject.js" download="knobject"><button class="btn btn-primary">Download Knobject.js</button></a>
@@ -50,6 +51,12 @@
 					    	</thead>
 					    	<tbody class="left-align">
 					    		<tr>
+					        		<td>axis</td>
+					        		<td>Boolean</td>
+					        		<td>true</td>
+					        		<td>sets either the x-axis(true) or y-axis(false) to control the mouse</td>
+					      		</tr>
+					    		<tr>
 					        		<td>color</td>
 					        		<td>String</td>
 					        		<td>'rgb(126,38,36)'</td>
@@ -63,8 +70,8 @@
 					      		</tr>
 					      		<tr>
 					        		<td>diameter</td>
-					        		<td>String</td>
-					        		<td>'50px'</td>
+					        		<td>Number</td>
+					        		<td>50</td>
 					        		<td>the height and width of the knob</td>
 					      		</tr>
 					      		<tr>
@@ -151,6 +158,8 @@
 							<br/>
 							&nbsp; knobId: 'knob1', 
 							<br/>
+							&nbsp; axis: true,
+							<br/>
 							&nbsp; orientation: 'normal',
 							<br/>
 							&nbsp; max: 100,
@@ -204,6 +213,8 @@
 							&nbsp; containerId: 'knobContainer2', 
 							<br/>
 							&nbsp; knobId: 'knob2', 
+							<br/>
+							&nbsp; axis: true,
 							<br/>
 							&nbsp; orientation: 'centered',
 							<br/>
@@ -277,6 +288,7 @@
 <script>
 
 var parameters1 = {
+	axis: true,
 	containerId: 'knobContainer1',
 	knobId: 'knob1',
 	diameter: 200,
@@ -294,6 +306,7 @@ var parameters1 = {
 var knob1 = new Knob(parameters1);
 
 var parameters2 = {
+	axis: false,
 	containerId: 'knobContainer2',
 	knobId: 'knob2',
 	diameter: 200,
