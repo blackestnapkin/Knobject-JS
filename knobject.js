@@ -123,6 +123,7 @@ function Knob(array) {
     return this;
 }
 Knob.prototype.capture = function(event) {
+    if(this.xAxis == null || typeof this.xAxis != 'boolean') { this.xAxis = true; }
     var self = this;
     if(!event.altKey) {
         var x = event.clientX;
